@@ -1,0 +1,27 @@
+# Create a Drupal CMS
+version: '3.1'
+
+services:
+  drupal:
+    image: custom-drupal
+    build: .
+    ports:
+      - "80:80"
+    volumes:
+      - drupal-modules:/var/www/html/modules
+      - drupal-profile:/var/www/html/profiles
+      - drupal-sites:/var/www/html/sites
+      - drupal-themes:/var/www/html/themes
+  postgres:
+    image: postgres
+    environment:
+      - POSTGRES_PASSWORD=mypasswd
+    volumes:
+      - drupal-db:/var/lib/postgresql/data
+
+volumes:
+  drupal-modules:
+  drupal-profile:
+  drupal-sites:
+  drupal-themes:
+  drupal-db:
